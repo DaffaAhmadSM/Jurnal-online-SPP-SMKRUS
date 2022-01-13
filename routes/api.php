@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 //protected route
 Route::group(['middleware' => ['auth:sanctum']], function () {
    Route::post('/logout', [LoginController::class, 'logout']);
+   Route::get('/invoice', [InvoiceController::class, 'index']);
 });
 
 // Route::resource('invoice', LoginController::class);

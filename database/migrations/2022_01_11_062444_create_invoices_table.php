@@ -15,16 +15,17 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('nis');
-            $table->string('nama_siswa');
-            $table->string('smt_gasal');
-            $table->string('spp_jan');
-            $table->string('pkl1');
-            $table->string('osis_genap');
-            $table->string('pas_genap');
-            $table->string('admin_bank');
-            $table->string('jumlah');
-            $table->string('keterangan');
+            $table->string('nisn');
+            $table->foreignId('wali_kelas_id');
+            $table->string('SMT Gasal');
+            $table->string('SMT Genap');
+            $table->string('PKL 1');
+            $table->string('OSIS Genap');
+            $table->string('PAS Genap');
+            $table->string('PAS Ganjil');
+            $table->string('Admin Bank');
+            $table->string('Jumlah');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

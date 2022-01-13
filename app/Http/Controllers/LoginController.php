@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LoginApi;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\HasApiTokens;
 
 class LoginController extends Controller
 {
@@ -18,13 +19,12 @@ class LoginController extends Controller
         $fields = $request->validate([
             'nisn' => 'required|string',
         ]);
-        $user = LoginApi::where('nisn', $fields['nisn'])->first();
-        $token = $user->createToken('token')->plainTextToken;
+        $user = Invoice::where('nisn', $fields['nisn'])->first();
+        $token = $user->createToken('token')->plainTextToken; 
 
         return [
             'user' => $user,
-            'token' => $token
-
+            'token' => $token,
         ];
         
     }

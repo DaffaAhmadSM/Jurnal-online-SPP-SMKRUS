@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLoginApisTable extends Migration
+class CreateWaliKelasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateLoginApisTable extends Migration
      */
     public function up()
     {
-        Schema::create('login_apis', function (Blueprint $table) {
+        Schema::create('wali_kelas', function (Blueprint $table) {
             $table->id();
-            $table->string('nisn');
+            $table->string('nama');
+            $table->string('email');
+            $table->string('password');
+            $table->string('kelas');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateLoginApisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('login_apis');
+        Schema::dropIfExists('wali_kelas');
     }
 }
