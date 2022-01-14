@@ -18,7 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->string('nisn');
             $table->foreignId('wali_kelas_id');
             $table->string('SMT Gasal');
-            $table->string('SMT Genap');
+            $table->string('SPP_bulanan');
             $table->string('PKL 1');
             $table->string('OSIS Genap');
             $table->string('PAS Genap');
