@@ -19,6 +19,7 @@ class LoginController extends Controller
         $fields = $request->validate([
             'nisn' => 'required|string',
         ]);
+        //check nisn
         $user = Invoice::where('nisn', $fields['nisn'])->first();
         $token = $user->createToken('token')->plainTextToken; 
 

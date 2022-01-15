@@ -2,10 +2,16 @@
 
 namespace App\Imports;
 
+use App\Models\User;
 use App\Models\Invoice;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Imports\HeadingRowFormatter;
 
-class InvoiceImport implements ToModel
+HeadingRowFormatter::default('none');
+
+class InvoiceImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -15,7 +21,14 @@ class InvoiceImport implements ToModel
     public function model(array $row)
     {
         return new Invoice([
-            //
+            'nisn' => $row['NIS'],
+            'wali_kelas_id' => Auth::user(),
+            'namaColumn' => '',
+            'jumlah' => ''
         ]);
+    }
+    public function headingRow(): int
+    {
+        return 7;
     }
 }

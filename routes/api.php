@@ -1,9 +1,10 @@
 <?php
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UploadController;
+use App\Http\Controllers\InvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,14 @@ use Illuminate\Support\Facades\Route;
 //protected route
 Route::group(['middleware' => ['auth:sanctum']], function () {
    Route::post('/logout', [LoginController::class, 'logout']);
+   Route::post('/import', [UploadController::class, 'store'])->name('importexcel');
    Route::get('/invoice', [InvoiceController::class, 'index']);
+   Route::get('/export', [UploadController::class, 'export'])->name('exportexcel');
 });
 
 // Route::resource('invoice', LoginController::class);
 
 //public route
+Route::post('/import', [UploadController::class, 'store'])->name('importexcel');
 Route::post('/login', [LoginController::class, 'store']);
 

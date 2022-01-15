@@ -17,6 +17,6 @@ class Invoice extends Authenticatable
 
     public function wali_kelas()
     {
-        return $this->belongsTo(WaliKelas::class);
+        return $this->belongsTo(User::class);
     }
 }
