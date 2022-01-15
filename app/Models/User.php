@@ -17,11 +17,12 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $fillable = ['name','email','password','kelas'];
+
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
