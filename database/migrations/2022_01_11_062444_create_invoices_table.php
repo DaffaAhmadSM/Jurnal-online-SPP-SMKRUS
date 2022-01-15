@@ -18,7 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->string('nisn');
             $table->foreignId('wali_kelas_id');
             $table->string('namaColumn');
-            $table->string('jumlah');
+            $table->integer('jumlah');
             $table->rememberToken();
             $table->timestamps();
         });
