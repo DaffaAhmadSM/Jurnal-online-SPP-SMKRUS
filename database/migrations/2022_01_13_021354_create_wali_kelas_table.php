@@ -18,7 +18,7 @@ class CreateWaliKelasTable extends Migration
             $table->string('nama');
             $table->string('email');
             $table->string('password');
-            $table->string('kelas');
+            $table->string('kelas')->nullable();
             $table->timestamps();
         });
     }
