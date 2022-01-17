@@ -17,7 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name','email','password','kelas'];
+    protected $fillable = ['name','email','password'];
 
     public function invoice()
     {
@@ -32,6 +32,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    protected $guarded =[
+        "kelas"
     ];
 
     /**

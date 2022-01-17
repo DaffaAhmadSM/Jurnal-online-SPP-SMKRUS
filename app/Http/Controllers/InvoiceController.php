@@ -14,7 +14,8 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $tagihan = Invoice::all(); 
+
+        $tagihan = Invoice::where('nisn', Auth::user()->nisn)->get(); 
         $invoice = Invoice::first();
 
         return [
