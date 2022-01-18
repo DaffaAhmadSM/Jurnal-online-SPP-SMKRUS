@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UploadController;
 
 // --------------------------
 // Custom Backpack Routes
@@ -18,4 +19,5 @@ Route::group([
 ], function () { // custom admin routes
     
     Route::get('upload', [App\Http\Controllers\UploadController::class, 'import']);
+    Route::post('/import', [UploadController::class, 'store'])->name('importexcel');
 }); // this should be the absolute last line of this file
