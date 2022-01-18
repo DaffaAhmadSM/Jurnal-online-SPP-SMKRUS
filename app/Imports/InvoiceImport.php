@@ -6,12 +6,12 @@ use App\Models\User;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\HeadingRowImport;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 use Maatwebsite\Excel\Imports\HeadingRowFormatter;
+use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 
 HeadingRowFormatter::default('none');
-session_start();
 class InvoiceImport implements ToModel, WithHeadingRow, WithCalculatedFormulas
 {
     /**
@@ -23,13 +23,9 @@ class InvoiceImport implements ToModel, WithHeadingRow, WithCalculatedFormulas
     {
         return new Invoice([
             'nisn' => $row['NIS'],
-            'wali_kelas_id' => $_SESSION['user'],
-            'namaColumn' => $row['SPP'],
+            'wali_kelas_id' => backpack_user()->id,
+            'namaColumn' => $_SESSION['heading'][0][0][0],
             'jumlah' => 1
         ]);
-    }
-    public function headingRow(): int
-    {
-        return 6;
     }
 }
