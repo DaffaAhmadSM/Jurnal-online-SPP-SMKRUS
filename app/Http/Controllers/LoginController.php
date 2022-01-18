@@ -26,6 +26,7 @@ class LoginController extends Controller
         return [
             'user' => $fields['nisn'],
             'token' => $token,
+            'status' => 'success'
         ];
         
     }
