@@ -19,7 +19,6 @@ use App\Http\Controllers\InvoiceController;
 //protected route
 Route::group(['middleware' => ['auth:sanctum']], function () {
    Route::post('/logout', [LoginController::class, 'logout']);
-   Route::post('/import', [UploadController::class, 'store'])->name('importexcel');
    Route::get('/invoice', [InvoiceController::class, 'index']);
    Route::get('/export', [UploadController::class, 'export'])->name('exportexcel');
 });
@@ -27,6 +26,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 // Route::resource('invoice', LoginController::class);
 
 //public route
-Route::post('/import', [UploadController::class, 'store'])->name('importexcel');
 Route::post('/login', [LoginController::class, 'store']);
 

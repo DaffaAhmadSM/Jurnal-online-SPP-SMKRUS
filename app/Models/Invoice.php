@@ -13,7 +13,7 @@ class Invoice extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $fillable = ['nisn','wali_kelas_id','SMT Gasal','SPP_bulanan','PKL 1','OSIS Genap','PAS Genap','PAS Ganjil','Admin Bank','Jumlah'];
+    protected $fillable = ['nisn','wali_kelas_id','namaColumn', 'jumlah'];
 
     public function wali_kelas()
     {
