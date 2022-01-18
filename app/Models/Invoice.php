@@ -12,10 +12,15 @@ use Laravel\Sanctum\HasApiTokens;
 class Invoice extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
     protected $fillable = ['nisn','wali_kelas_id','namaColumn', 'jumlah'];
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'created_at',
+        'updated_at'
+    ];
 
-    public function wali_kelas()
+    public function Wali_kelas()
     {
         return $this->belongsTo(User::class);
     }
