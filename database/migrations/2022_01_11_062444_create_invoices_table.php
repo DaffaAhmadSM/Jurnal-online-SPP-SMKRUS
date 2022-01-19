@@ -14,11 +14,11 @@ class CreateInvoicesTable extends Migration
     public function up()
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id')->unsigned();
             $table->string('nisn');
             $table->foreignId('wali_kelas_id');
             $table->string('namaColumn');
-            $table->integer('jumlah');
+            $table->string('jumlah')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
