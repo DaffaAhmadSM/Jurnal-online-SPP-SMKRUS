@@ -17,7 +17,8 @@ class Invoice extends Authenticatable
         'password',
         'remember_token',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'wali_kelas_id'
     ];
 
     public function Wali_kelas()
