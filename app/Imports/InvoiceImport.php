@@ -32,8 +32,8 @@ class InvoiceImport implements ToCollection, WithCalculatedFormulas, WithHeading
         
     foreach ($rows as $row) 
     {
-        $i = 2;
-        while ($i < count($_SESSION['heading'][0][0])) {
+        $i = 3;
+        while ($i < count($_SESSION['heading'][0][0])-1) {
             Invoice::Create([
                 'nisn' => $row['nis'],
                 'wali_kelas_id' => backpack_user()->id,
