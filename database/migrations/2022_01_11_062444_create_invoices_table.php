@@ -15,7 +15,8 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->string('nisn');
+            $table->string('nama');
+            $table->string('nis');
             $table->foreignId('wali_kelas_id');
             $table->string('namaColumn');
             $table->string('jumlah')->nullable();

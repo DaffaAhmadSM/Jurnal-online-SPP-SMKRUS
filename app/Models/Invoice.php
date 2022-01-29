@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Invoice extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $fillable = ['nisn','wali_kelas_id','namaColumn', 'jumlah'];
+    protected $fillable = ['nis','wali_kelas_id','namaColumn', 'jumlah', 'nama'];
     protected $hidden = [
         'password',
         'remember_token',
