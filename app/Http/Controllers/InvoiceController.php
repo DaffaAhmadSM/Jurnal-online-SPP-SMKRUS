@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use App\Imports\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class InvoiceController extends Controller
@@ -16,13 +17,27 @@ class InvoiceController extends Controller
      */
     public function index()
     {
+        $tagihans = DB::table('Invoices')
+                    ->select('id','nis','namaColumn','jumlah')
+                    ->where('nis', Auth::user()->nis)
+                    ->get();
+        
+        foreach ($tagihans as $detail) {
+            $tagihan[] = [
+                "id" => $detail->id,
+                "nis" => $detail->nis,
+                'namaTagihan' => $detail->namaColumn,
+                'jumlah' => $detail->jumlah,
+                "jumlah_text" => 'Rp. ' . number_format($detail->jumlah, 0,',','.')
+            ];
+        } 
+    
 
-        $tagihan = Invoice::where('nisn', Auth::user()->nisn)->get(); 
-        $invoice = Invoice::first();
+        $walikelas = Invoice::where('nis', Auth::user()->nis)->first();
 
         return [
-            'walikelas' => $invoice->wali_kelas->name,
-            'kelas' => $invoice->wali_kelas->kelas,
+            'walikelas' => $walikelas->wali_kelas->name,
+            'kelas' => $walikelas->wali_kelas->kelas,
             'tagihan' => $tagihan,
         ];
     }
