@@ -17,10 +17,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $tagihans = DB::table('Invoices')
-                    ->select('id','nis','namaColumn','jumlah')
-                    ->where('nis', Auth::user()->nis)
-                    ->get();
+        $tagihans = Invoice::where('nis', Auth::user()->nis)->get();
         
         foreach ($tagihans as $detail) {
             $tagihan[] = [
