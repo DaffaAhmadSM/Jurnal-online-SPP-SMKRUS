@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\User;
+use App\Models\Siswa;
 use App\Models\Invoice;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -28,10 +29,9 @@ class InvoiceImport implements ToCollection, WithCalculatedFormulas, WithHeading
     */
     public function collection(Collection $rows)
     {
-        
-        
-    foreach ($rows as $row) 
-    {
+$user = Invoice::where('wali_kelas_id', backpack_user()->id)->first();
+    if (!$user) {
+        foreach ($rows as $row) {
         $i = 3;
         while ($i < count($_SESSION['heading'][0][0])-1) {
             Invoice::Create([
@@ -42,11 +42,26 @@ class InvoiceImport implements ToCollection, WithCalculatedFormulas, WithHeading
                 'jumlah' => $row[$_SESSION['heading'][0][0][$i]]
             ]);
             $i++;
+        }
+        Siswa::Create([
+            'nis' => $row['nis']
+        ]);
+     } 
+    }else {
+        Invoice::where('wali_kelas_id', backpack_user()->id)->delete();
+        foreach ($rows as $row){
+        $i = 3;
+        while ($i < count($_SESSION['heading'][0][0])-1) {
+            Invoice::Create([
+                'nis' => $row['nis'],
+                'nama' => $row['nama_siswa'],
+                'wali_kelas_id' => backpack_user()->id,
+                'namaColumn' => $_SESSION['heading'][0][0][$i],
+                'jumlah' => $row[$_SESSION['heading'][0][0][$i]]
+            ]);
+            $i++;
+        }
+      } 
     }
-        
-    } 
-        // foreach ($_SESSION['heading'][0][0] as $heading) {
-                    
-        // }
-    }
+  }
 }

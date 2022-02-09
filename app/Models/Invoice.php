@@ -2,20 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
 
-class Invoice extends Authenticatable
+class Invoice extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
     protected $fillable = ['nis','wali_kelas_id','namaColumn', 'jumlah', 'nama'];
     protected $hidden = [
         'password',
-        'remember_token',
         'created_at',
         'updated_at',
         'wali_kelas_id'

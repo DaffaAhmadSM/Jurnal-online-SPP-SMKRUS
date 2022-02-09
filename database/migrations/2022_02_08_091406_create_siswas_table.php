@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInvoicesTable extends Migration
+class CreateSiswasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateInvoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoices', function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned();
-            $table->string('nama');
+        Schema::create('siswas', function (Blueprint $table) {
+            $table->id();
             $table->string('nis');
-            $table->foreignId('wali_kelas_id');
-            $table->string('namaColumn');
-            $table->string('jumlah')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateInvoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('siswas');
     }
 }

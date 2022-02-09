@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Siswa;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -20,19 +21,16 @@ class LoginController extends Controller
         $fields = $request->validate([
             'nis' => 'required|string',
         ]);
-        $namaSiswa = DB::table('invoices')
-                    ->select('nama')
-                    ->where('nis', $fields['nis'])
-                    ->first();
+        $namaSiswa = Invoice::where('nis', $fields['nis'])->first();
         //check nis
-        $user = Invoice::where('nis', $fields['nis'])->first();
+        $user = Siswa::where('nis', $fields['nis'])->first();
         $token = $user->createToken('token')->plainTextToken; 
 
         return [
             'user' => $fields['nis'],
             'nama_siswa' => $namaSiswa->nama,
-            'wali_kelas' => $user->wali_kelas->name,
-            'kelas' => $user->Wali_kelas->kelas,    
+            'wali_kelas' => $namaSiswa->wali_kelas->name,
+            'kelas' => $namaSiswa->Wali_kelas->kelas,    
             'token' => $token,
         ];
         
