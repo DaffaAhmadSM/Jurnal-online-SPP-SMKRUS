@@ -7,7 +7,6 @@ use App\Imports\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
 class InvoiceController extends Controller
 {
     /**
@@ -15,13 +14,11 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
-        $tagihans = DB::table('Invoices')
-                    ->select('id','nis','namaColumn','jumlah')
-                    ->where('nis', Auth::user()->nis)
-                    ->get();
         
+        $tagihans = Invoice::where('nis', Auth::user()->nis)->get();
         foreach ($tagihans as $detail) {
             $tagihan[] = [
                 "id" => $detail->id,

@@ -26,17 +26,12 @@
                @yield('before_content_widgets')
                @yield('content')
                <div class="m-5">
-                <a class="btn btn-info" href="/create">Add data</a>
-                    <form action="{{route('importexcel')}}" method="POST" enctype="multipart/form-data">
-                        <input class="form-control" type="file" accept=".xls,.xlsx" name="file" >
-                        @csrf
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-            
-           
-                    <a href="/export" class="btn btn-warning">export Excel</a>
-                    <a href="/exportpdf" class="btn btn-warning">export PDF</a>
-            {{--         
+                 <form action="{{route('importexcel')}}" method="POST" enctype="multipart/form-data">
+                    <input class="form-control" type="file" accept=".xls,.xlsx" name="file" >
+                    @csrf
+                    <button type="submit" class="btn btn-primary m-4">Submit</button>
+                </form>
+                {{--         
                 </div>
                 
                 <div class= "container">
