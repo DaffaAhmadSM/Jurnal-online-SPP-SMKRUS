@@ -39,7 +39,6 @@ class LoginController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
         
-        
     }
 
     public function show($id)
