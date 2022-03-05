@@ -25,15 +25,19 @@ class LoginController extends Controller
         //check nis
         $user = Siswa::where('nis', $fields['nis'])->first();
         $token = $user->createToken('token')->plainTextToken; 
-
-        return [
-            'user' => $fields['nis'],
-            'nama_siswa' => $namaSiswa->nama,
-            'wali_kelas' => $namaSiswa->wali_kelas->name,
-            'kelas' => $namaSiswa->Wali_kelas->kelas,    
-            'token' => $token,
-            'status' => 'success'
-        ];
+        if ($user) {
+            return [
+                'user' => $fields['nis'],
+                'nama_siswa' => $namaSiswa->nama,
+                'wali_kelas' => $namaSiswa->wali_kelas->name,
+                'kelas' => $namaSiswa->Wali_kelas->kelas,    
+                'token' => $token,
+            ];
+        }else{
+            return response()->json([
+                'message' => 'NIS tidak ditemukan'
+            ], Response::HTTP_NOT_FOUND);
+        }
         
     }
 

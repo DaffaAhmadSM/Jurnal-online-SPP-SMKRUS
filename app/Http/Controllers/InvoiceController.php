@@ -31,12 +31,18 @@ class InvoiceController extends Controller
     
 
         $walikelas = Invoice::where('nis', Auth::user()->nis)->first();
-
-        return [
-            'walikelas' => $walikelas->wali_kelas->name,
-            'kelas' => $walikelas->wali_kelas->kelas,
-            'tagihan' => $tagihan,
-        ];
+        if ($tagihans) {
+            return [
+                'walikelas' => $walikelas->wali_kelas->name,
+                'kelas' => $walikelas->wali_kelas->kelas,
+                'tagihan' => $tagihan,
+            ];
+        }else{
+            return response()->json([
+                'message' => 'Tagihan tidak ditemukan'
+            ], Response::HTTP_NOT_FOUND);
+        }
+       
     }
 
     /**
