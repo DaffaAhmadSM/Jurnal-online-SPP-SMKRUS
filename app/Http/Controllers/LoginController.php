@@ -24,14 +24,15 @@ class LoginController extends Controller
         $namaSiswa = Invoice::where('nis', $fields['nis'])->first();
         //check nis
         $user = Siswa::where('nis', $fields['nis'])->first();
-        $token = $user->createToken('token')->plainTextToken; 
         if ($user) {
+            $token = $user->createToken('token')->plainTextToken;
             return [
                 'user' => $fields['nis'],
                 'nama_siswa' => $namaSiswa->nama,
                 'wali_kelas' => $namaSiswa->wali_kelas->name,
                 'kelas' => $namaSiswa->Wali_kelas->kelas,    
                 'token' => $token,
+                'status' => 'success',
             ];
         }else{
             return response()->json([
