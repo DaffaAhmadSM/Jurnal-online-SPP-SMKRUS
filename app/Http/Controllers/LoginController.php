@@ -25,6 +25,8 @@ class LoginController extends Controller
         //check nis
         $user = Siswa::where('nis', $fields['nis'])->first();
         if ($user) {
+            $jumlahs = Invoice::where('nis', $fields['nis'])->get();
+            $jumlah = $jumlahs->whereIn('namaColumn', 'jumlah')->sum('jumlah');
             $token = $user->createToken('token')->plainTextToken;
             return [
                 'user' => $fields['nis'],
@@ -32,6 +34,7 @@ class LoginController extends Controller
                 'wali_kelas' => $namaSiswa->wali_kelas->name,
                 'kelas' => $namaSiswa->Wali_kelas->kelas,    
                 'token' => $token,
+                'jumlah' => 'Rp. ' . number_format($jumlah, 0,',','.'),
                 'status' => 'success',
             ];
         }else{
